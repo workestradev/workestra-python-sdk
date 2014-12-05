@@ -1,3 +1,4 @@
+"""
 
  Copyright (c) 2014 Workestra LLC
  All rights reserved.
@@ -26,3 +27,48 @@
  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+ """
+
+
+import requests
+import json
+import datetime
+import os
+import sys
+
+
+class WorkestraSDK:
+
+  def __init__(self):
+    self.endpoint = 'https://www.workestra.co/api/v1'
+    self.basicAuthUsername = ''
+    self.basicAuthPassword = ''
+
+
+  def setBasicAuth(self, username, password):
+    self.basicAuthUsername = username
+    self.basicAuthPassword = password
+
+  def setApiKey(self, key):
+    self.basicAuthUsername = key
+    self.basicAuthPassword = 'w'
+
+
+  def listNotifications(self):
+      endpoint = self.endpoint + "/notifications"
+
+  
+      r = requests.get(endpoint, auth=( self.basicAuthUsername , self.basicAuthPassword))
+      try:
+        response=r.json()
+      except:
+        print r
+        response=False
+      return response
+
+
+
+
+
+
